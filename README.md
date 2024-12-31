@@ -18,53 +18,75 @@ I’m focused on getting people off big tech cloud providers for benefits relate
 
 ### Software Infrastructure
 https://ubuntu.com/desktop/wsl
+
 https://learn.microsoft.com/en-us/windows/wsl/install
+
 Docker: This is your containerization platform that packages all AI components into manageable, isolated environments. It will help us run all the AI tools with a single command. https://www.docker.com/products/docker-desktop/
+
 FastAPI
 
 ### Data Infrastructure
 https://neo4j.com/download/neo4j-desktop
+
 https://neo4j.com/labs/genai-ecosystem/llm-graph-builder/
+
 Postgres: This tool stores all data and logs, acting as a memory buffer for the n8n framework.
+
 Qdrant: A vector database and search engine that makes AI-generated content searchable and manageable.
+
 Storj for object storage and backup. http://storj.io/
 
 ### AI Infrastructure
 Ollama: An AI model manager that enables you to run any open-source large language model locally with minimal hardware requirements. https://ollama.com/
+
 https://www.nvidia.com/en-gb/deep-learning-ai/solutions/data-science/
+
 https://github.com/NVIDIA/data-science-stack
+
 LangChain for orchestration
+
 n8n: A workflow automation framework that allows you to build AI workflows using a drag-and-drop interface. It requires no coding knowledge, making it ideal for non-technical individuals. https://n8n.io/integrations/
 
 ### Machine Learning Models
 https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B
+
 mixtral 8x7B
 Mistral 7B
 
 ### AI Playgrounds
 https://github.com/n8n-io/self-hosted-ai-starter-kit
+
 https://neo4j.com/developer-blog/langchain-neo4j-starter-kit/
 
 ### Conversational User Interfaces
 https://lmstudio.ai/
+
 https://openwebui.com/
 
 ### Front-End Development
 https://v2.tauri.app/
+
 https://v2.tauri.app/start/frontend/sveltekit/
 
 ## Documentation
 ### Technical Docs
 https://documentation.ubuntu.com/wsl/en/latest/
+
 https://docs.n8n.io/hosting/architecture/overview/
 
 ### Tutorials
 https://medium.com/@Tanzim/how-to-run-ollama-in-windows-via-wsl-8ace765cee12
+
 https://blogs.nvidia.com/blog/ai-decoded-lm-studio/
+
 https://www.datacamp.com/tutorial/local-ai
+
 https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Frameworks_libraries/Svelte_getting_started
+
 https://electric-sql.com/blog/2024/02/05/local-first-ai-with-tauri-postgres-pgvector-llama
+
 https://neo4j.com/blog/graphrag-manifesto/
+
 https://neo4j.com/developer/genai-ecosystem/ai-for-customer-experiences/
 
 ## Install Log
