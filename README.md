@@ -37,6 +37,8 @@ Qdrant: A vector database and search engine that makes AI-generated content sear
 Storj for object storage and backup. http://storj.io/
 
 ### AI Infrastructure
+NVIDIA CUDA toolkit for WSL 2 on Ubuntu
+
 Ollama: An AI model manager that enables you to run any open-source large language model locally with minimal hardware requirements. https://ollama.com/
 
 https://www.nvidia.com/en-gb/deep-learning-ai/solutions/data-science/
@@ -48,6 +50,14 @@ LangChain for orchestration
 n8n: A workflow automation framework that allows you to build AI workflows using a drag-and-drop interface. It requires no coding knowledge, making it ideal for non-technical individuals. https://n8n.io/integrations/
 
 ### Machine Learning Models
+https://huggingface.co/docs/transformers/installation
+
+PyTorch installation instructions.
+
+TensorFlow 2.0 installation instructions.
+
+Flax installation instructions.
+
 https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B
 
 mixtral 8x7B
@@ -76,6 +86,10 @@ https://documentation.ubuntu.com/wsl/en/latest/
 https://docs.n8n.io/hosting/architecture/overview/
 
 ### Tutorials
+https://documentation.ubuntu.com/wsl/en/latest/tutorials/gpu-cuda/
+
+https://documentation.ubuntu.com/wsl/en/latest/tutorials/data-science-and-engineering/
+
 https://medium.com/@Tanzim/how-to-run-ollama-in-windows-via-wsl-8ace765cee12
 
 https://blogs.nvidia.com/blog/ai-decoded-lm-studio/
