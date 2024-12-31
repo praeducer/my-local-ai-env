@@ -51,6 +51,7 @@ n8n: A workflow automation framework that allows you to build AI workflows using
 https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B
 
 mixtral 8x7B
+
 Mistral 7B
 
 ### AI Playgrounds
