@@ -6,7 +6,10 @@ I am building an AI agent/app to help people develop a career strategy and apply
 ## Hardware
 ### Alienware Aurora 16
 https://www.dell.com/en-us/shop/desktop-computers/alienware-aurora-r16-gaming-desktop/spd/alienware-aurora-r16-desktop
+
 https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/
+
+https://www.intel.com/content/www/us/en/products/details/processors/core/i9.html
 
 ## Software
 I’m obsessed with open source, self-hosted, local first, multi-agent workflows. This starter kit is how I’ll prototype my next project: https://github.com/n8n-io/self-hosted-ai-starter-kit. I want to build open AI agents to help people find work and balance out all the corporate AI recruiting automation. The tech stack is centered around libraries like Ollama, LangChain, n8n, and Neo4j.
