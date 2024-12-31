@@ -94,9 +94,13 @@ https://neo4j.com/developer/genai-ecosystem/ai-for-customer-experiences/
 ### PowerShell
 
 ### Ubuntu
+```
 curl https://ollama.ai/install.sh | sh
 ollama run mistral
+```
 
+```
 git clone https://github.com/NVIDIA/data-science-stack
 cd data-science-stack
 ./data-science-stack setup-system
+```
