@@ -112,7 +112,12 @@ https://neo4j.com/developer/genai-ecosystem/ai-for-customer-experiences/
 ### Ubuntu
 ```
 curl https://ollama.ai/install.sh | sh
-ollama run mistral
+ollama run mistral-nemo
+```
+
+To run Open WebUI with Nvidia GPU support, use this command:
+```
+docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
 
 ```
