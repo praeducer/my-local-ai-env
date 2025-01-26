@@ -23,6 +23,10 @@ https://learn.microsoft.com/en-us/windows/wsl/install
 
 Docker: This is your containerization platform that packages all AI components into manageable, isolated environments. It will help us run all the AI tools with a single command. https://www.docker.com/products/docker-desktop/
 
+https://docs.docker.com/desktop/features/wsl/
+
+https://git-scm.com/downloads/win
+
 FastAPI
 
 ### Data Infrastructure
@@ -106,6 +110,11 @@ https://neo4j.com/blog/graphrag-manifesto/
 
 https://neo4j.com/developer/genai-ecosystem/ai-for-customer-experiences/
 
+https://www.reddit.com/r/ollama/comments/1cpo6nb/lan_configuration_for_open_webui/
+
+### Troubleshooting
+https://www.pdq.com/blog/what-is-the-powershell-equivalent-of-ipconfig/
+
 ## Install Log
 ### PowerShell
 
@@ -124,4 +133,8 @@ docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gatew
 git clone https://github.com/NVIDIA/data-science-stack
 cd data-science-stack
 ./data-science-stack setup-system
+```
+
+```
+C:\Users\paulp> sudo netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=192.168.1.254
 ```
