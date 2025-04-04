@@ -116,18 +116,73 @@ https://www.reddit.com/r/ollama/comments/1cpo6nb/lan_configuration_for_open_webu
 https://www.pdq.com/blog/what-is-the-powershell-equivalent-of-ipconfig/
 
 ## Install Log
-### PowerShell
+### In Windows PowerShell Terminal
+Developers can access the power of both Windows and Linux at the same time on a Windows machine. The Windows Subsystem for Linux (WSL) lets developers install a Linux distribution (such as Ubuntu, OpenSUSE, Kali, Debian, Arch Linux, etc) and use Linux applications, utilities, and Bash command-line tools directly on Windows, unmodified, without the overhead of a traditional virtual machine or dualboot setup.
 
-### Ubuntu
+https://learn.microsoft.com/en-us/windows/wsl/install
+
+If you wish to utilize Open WebUI with Ollama included or CUDA acceleration, we recommend utilizing our official images tagged with either :cuda or :ollama. To enable CUDA, you must install the Nvidia CUDA container toolkit on your Linux/WSL system.
+
+https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/
+
+    Linux applications can run as is in WSL 2. WSL 2 is characteristically a VM with a Linux WSL Kernel in it that provides full compatibility with mainstream Linux kernel allowing support for native Linux applications including popular Linux distros.
+    Faster file system support and that’s more performant.
+    WSL 2 is tightly integrated with the Microsoft Windows operating system, which allows it to run Linux applications alongside and even interop with other Windows desktop and modern store apps.
+    
+With NVIDIA CUDA support for WSL 2, developers can leverage NVIDIA GPU accelerated computing technology for data science, machine learning and inference on Windows through WSL. GPU acceleration also serves to bring down the performance overhead of running an application inside a WSL like environment close to near-native by being able to pipeline more parallel work on the GPU with less CPU intervention.
+![Figure 1. Illustration of the possibilities with NVIDIA CUDA software stack on WSL 2](https://docs.nvidia.com/cuda/wsl-user-guide/_images/wsl-launch-upt-0625-rz.png)
+
+https://docs.nvidia.com/cuda/wsl-user-guide/index.html
+
+For example, when storing your WSL project files:
+
+    Use the Linux file system root directory: \\wsl$\<DistroName>\home\<UserName>\Project
+    Not the Windows file system root directory: C:\Users\<UserName>\Project or /mnt/c/Users/<UserName>/Project$
+
+![alt text](https://learn.microsoft.com/en-us/windows/wsl/media/windows-file-explorer.png)
+
+Follow this step-by-step guide to Get started using Visual Studio Code with WSL, which includes installing the Remote Development extension pack. This extension enables you to run WSL, SSH, or a development container for editing and debugging with the full set of Visual Studio Code features. Quickly swap between different, separate development environments and make updates without worrying about impacting your local machine.
+
+Once VS Code is installed and set up, you can open your WSL project with a VS Code remote server by entering: code .
+
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
+
+Follow this step-by-step guide to Get started using Git on WSL and connect your project to the Git version control system, along with using the credential manager for authentication, using Git Ignore files, understanding Git line endings, and using the Git commands built-in to VS Code.
+
+![alt text](https://learn.microsoft.com/en-us/windows/wsl/media/git-versions.gif)
+
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git
+
+Follow this step-by-step guide to Get started with Docker remote containers on WSL 2 and connect your project to a remote development container with Docker Desktop for Windows.
+
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers
+
+Follow this step-by-step guide to set up GPU accelerated machine learning training in WSL and leverage your computer's GPU (graphics processing unit) to accelerate performance heavy workloads.
+
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute
+
+
+### In Ubuntu WSL2 Terminal
+
+
+To get up and running with large language models:
+```
+curl -fsSL https://ollama.com/install.sh | sh
+```
+Or
 ```
 curl https://ollama.ai/install.sh | sh
 ollama run mistral-nemo
 ```
 
+https://github.com/ollama/ollama
+
 To run Open WebUI with Nvidia GPU support, use this command:
 ```
 docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
 ```
+https://github.com/open-webui/open-webui
+
 
 ```
 git clone https://github.com/NVIDIA/data-science-stack
