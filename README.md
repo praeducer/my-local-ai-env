@@ -234,13 +234,123 @@ sudo systemctl restart docker
 
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-the-nvidia-container-toolkit
 
+After you install and configure the toolkit and install an NVIDIA GPU Driver, you can verify your installation by running a sample workload.
 
+    Run a sample CUDA container:
+```
+praeducer@prAIserver:~$ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+[sudo] password for praeducer:
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+5a7813e071bf: Pull complete
+Digest: sha256:72297848456d5d37d1262630108ab308d3e9ec7ed1c3286a32fe09856619a782
+Status: Downloaded newer image for ubuntu:latest
+Tue Apr  8 15:16:36 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.75                 Driver Version: 566.24         CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090        On  |   00000000:01:00.0  On |                  Off |
+|  0%   36C    P8             12W /  450W |    3149MiB /  24564MiB |      5%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+```
+
+CDI is an open specification for container runtimes that abstracts what access to a device, such as an NVIDIA GPU, means, and standardizes access across container runtimes. Popular container runtimes can read and process the specification to ensure that a device is available in a container. CDI simplifies adding support for devices such as NVIDIA GPUs because the specification is applicable to all container runtimes that support CDI.
+
+CDI also improves the compatibility of the NVIDIA container stack with certain features such as rootless containers.
+
+Generate the CDI specification file:
+```
+praeducer@prAIserver:~$ sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+INFO[0000] Using /usr/lib/wsl/lib/libnvidia-ml.so.1
+INFO[0000] Auto-detected mode as 'wsl'
+INFO[0000] Selecting /dev/dxg as /dev/dxg
+INFO[0000] Using WSL driver store paths: [/usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f]
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libcuda.so.1.1 as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libcuda.so.1.1
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libcuda_loader.so as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libcuda_loader.so
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ptxjitcompiler.so.1 as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ptxjitcompiler.so.1
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ml.so.1 as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ml.so.1
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ml_loader.so as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvidia-ml_loader.so
+INFO[0000] Selecting /usr/lib/wsl/lib/libdxcore.so as /usr/lib/wsl/lib/libdxcore.so
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvdxgdmal.so.1 as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/libnvdxgdmal.so.1
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/nvcubins.bin as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/nvcubins.bin
+INFO[0000] Selecting /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/nvidia-smi as /usr/lib/wsl/drivers/nvdd.inf_amd64_0759f801dbae033f/nvidia-smi
+INFO[0000] Generated CDI spec with version 0.8.0
+
+praeducer@prAIserver:~$ nvidia-ctk cdi list
+INFO[0000] Found 1 CDI devices
+nvidia.com/gpu=all
+```
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html
+
+After you install and configura the toolkit (including generating a CDI specification) and install an NVIDIA GPU Driver, you can verify your installation by running a sample workload.
+```
+praeducer@prAIserver:~$ sudo apt install podman
+
+praeducer@prAIserver:~$ podman run --rm --security-opt=label=disable    --device=nvidia.com/gpu=all    ubuntu nvidia-smi
+Tue Apr  8 15:27:58 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 565.75                 Driver Version: 566.24         CUDA Version: 12.7     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4090        On  |   00000000:01:00.0  On |                  Off |
+|  0%   38C    P8             12W /  450W |    3216MiB /  24564MiB |      8%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+```
 
 Follow this step-by-step guide to Get started using Visual Studio Code with WSL, which includes installing the Remote Development extension pack. This extension enables you to run WSL, SSH, or a development container for editing and debugging with the full set of Visual Studio Code features. Quickly swap between different, separate development environments and make updates without worrying about impacting your local machine.
 
 Once VS Code is installed and set up, you can open your WSL project with a VS Code remote server by entering: code .
 
 https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
+
+The Remote Development extension pack allows you to open any folder in a container, on a remote machine, or in the Windows Subsystem for Linux (WSL) and take advantage of VS Code's full feature set. Since this lets you set up a full-time development environment anywhere, you can:
+
+    Develop on the same operating system you deploy to or use larger, faster, or more specialized hardware than your local machine.
+    Quickly swap between different, separate development environments and make updates without worrying about impacting your local machine.
+    Help new team members / contributors get productive quickly with easily spun up, consistent development containers.
+    Take advantage of a Linux based tool-chain right from the comfort of Windows from a full-featured development tool.
+
+No source code needs to be on your local machine to gain these benefits since Remote Development runs commands and extensions directly on the remote machine.
+
+This Remote Development extension pack includes four extensions:
+
+    Remote - SSH - Work with source code in any location by opening folders on a remote machine/VM using SSH. Supports x86_64, ARMv7l (AArch32), and ARMv8l (AArch64) glibc-based Linux, Windows 10/Server (1803+), and macOS 10.14+ (Mojave) SSH hosts.
+    Remote - Tunnels - Work with source code in any location by opening folders on a remote machine/VM using a VS Code Tunnel (rather than SSH).
+    Dev Containers - Work with a separate toolchain or container based application by opening any folder mounted into or inside a container.
+    WSL - Get a Linux-powered development experience from the comfort of Windows by opening any folder in the Windows Subsystem for Linux.
+
+https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+
+To add wget (to retrieve content from web servers) and ca-certificates (to allow SSL-based applications to check for the authenticity of SSL connections), enter:
+Bash
+```
+sudo apt-get install wget ca-certificates
+```
 
 Follow this step-by-step guide to Get started using Git on WSL and connect your project to the Git version control system, along with using the credential manager for authentication, using Git Ignore files, understanding Git line endings, and using the Git commands built-in to VS Code.
 
@@ -256,6 +366,11 @@ Follow this step-by-step guide to set up GPU accelerated machine learning traini
 
 https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute
 
+```
+git clone https://github.com/NVIDIA/data-science-stack
+cd data-science-stack
+./data-science-stack setup-system
+```
 
 
 To get up and running with large language models:
@@ -276,12 +391,6 @@ docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gatew
 ```
 https://github.com/open-webui/open-webui
 
-
-```
-git clone https://github.com/NVIDIA/data-science-stack
-cd data-science-stack
-./data-science-stack setup-system
-```
 
 ```
 C:\Users\paulp> sudo netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=192.168.1.254
