@@ -147,6 +147,16 @@ https://docs.nvidia.com/ai-enterprise/deployment/vmware/latest/docker.html
 
 The latest NVIDIA Windows GPU Driver will fully support WSL 2. With CUDA support in the driver, existing applications (compiled elsewhere on a Linux system for the same target GPU) can run unmodified within the WSL environment.
 
+```
+PS C:\Users\paulp> git update-git-for-windows
+Git for Windows 2.48.1.windows.1 (64-bit)
+Update 2.49.0.windows.1 is available
+Download and install Git for Windows v2.49.0.windows.1 [N/y]? y
+################################################################################################################ 100.0%
+PS C:\Users\paulp>
+```
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git
+
 ### In Ubuntu WSL2 Terminal
 
 To compile new CUDA applications, a CUDA Toolkit for Linux x86 is needed. CUDA Toolkit support for WSL is still in preview stage as developer tools such as profilers are not available yet. However, CUDA application development is fully supported in the WSL2 environment, as a result, users should be able to compile new CUDA Linux applications with the latest CUDA Toolkit for x86 Linux.
