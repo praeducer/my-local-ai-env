@@ -413,20 +413,28 @@ Follow this step-by-step guide to set up GPU accelerated machine learning traini
 
 https://learn.microsoft.com/en-us/windows/wsl/tutorials/gpu-compute
 
-```
-git clone https://github.com/NVIDIA/data-science-stack
-cd data-science-stack
-./data-science-stack setup-system
-```
 
 
-To get up and running with large language models:
+To get up and running with large language models on linux:
 ```
-curl -fsSL https://ollama.com/install.sh | sh
+praeducer@prAIserver:~$ curl -fsSL https://ollama.com/install.sh | sh
+>>> Cleaning up old version at /usr/local/lib/ollama
+[sudo] password for praeducer:
+>>> Installing ollama to /usr/local
+>>> Downloading Linux amd64 bundle
+######################################################################## 100.0%
+>>> Adding ollama user to render group...
+>>> Adding ollama user to video group...
+>>> Adding current user to ollama group...
+>>> Creating ollama systemd service...
+>>> Enabling and starting ollama service...
+>>> Nvidia GPU detected.
+>>> The Ollama API is now available at 127.0.0.1:11434.
+>>> Install complete. Run "ollama" from the command line.
 ```
-Or
+
+To test:
 ```
-curl https://ollama.ai/install.sh | sh
 ollama run mistral-nemo
 ```
 
@@ -438,6 +446,14 @@ docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gatew
 ```
 https://github.com/open-webui/open-webui
 
+
+### Unsure if these took effect
+
+```
+git clone https://github.com/NVIDIA/data-science-stack
+cd data-science-stack
+./data-science-stack setup-system
+```
 
 ```
 C:\Users\paulp> sudo netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=192.168.1.254
