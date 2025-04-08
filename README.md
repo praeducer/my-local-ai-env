@@ -379,6 +379,21 @@ sudo apt-get install openssh-server
 ```
 https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client
 
+To get started developing apps using Docker with WSL 2, we recommend using VS Code, along with the WSL, Dev Containers, and Docker extensions.
+
+    Install the VS Code WSL extension. This extension enables you to open your Linux project running on WSL in VS Code (no need to worry about pathing issues, binary compatibility, or other cross-OS challenges). https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl
+
+    Install the VS Code Dev Containers extension. This extension enables you to open your project folder or repo inside of a container, taking advantage of Visual Studio Code's full feature set to do your development work within the container. https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+
+    Install the VS Code Docker extension. This extension adds the functionality to build, manage, and deploy containerized applications from inside VS Code. (You need the Dev Containers extension to actually use the container as your dev environment.) https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers
+
+Quick start: Open an existing folder in a container
+
+This quick start covers how to set up a dev container for an existing project to use as your full-time development environment using existing source code on your filesystem.
+https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container 
+
 Follow this step-by-step guide to Get started using Git on WSL and connect your project to the Git version control system, along with using the credential manager for authentication, using Git Ignore files, understanding Git line endings, and using the Git commands built-in to VS Code.
 
 ![alt text](https://learn.microsoft.com/en-us/windows/wsl/media/git-versions.gif)
