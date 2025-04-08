@@ -324,8 +324,6 @@ Tue Apr  8 15:27:58 2025
 
 Follow this step-by-step guide to Get started using Visual Studio Code with WSL, which includes installing the Remote Development extension pack. This extension enables you to run WSL, SSH, or a development container for editing and debugging with the full set of Visual Studio Code features. Quickly swap between different, separate development environments and make updates without worrying about impacting your local machine.
 
-Once VS Code is installed and set up, you can open your WSL project with a VS Code remote server by entering: code .
-
 https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode
 
 The Remote Development extension pack allows you to open any folder in a container, on a remote machine, or in the Windows Subsystem for Linux (WSL) and take advantage of VS Code's full feature set. Since this lets you set up a full-time development environment anywhere, you can:
@@ -350,6 +348,18 @@ To add wget (to retrieve content from web servers) and ca-certificates (to allow
 Bash
 ```
 sudo apt-get install wget ca-certificates
+```
+
+Once VS Code is installed and set up, you can open your WSL project with a VS Code remote server by entering: code .
+```
+praeducer@prAIserver:~$ code .
+Installing VS Code Server for Linux x64 (4437686ffebaf200fa4a6e6e67f735f3edf24ada)
+Downloading: 100%
+Unpacking: 100%
+Unpacked 2067 files and folders to /home/praeducer/.vscode-server/bin/4437686ffebaf200fa4a6e6e67f735f3edf24ada.
+Looking for compatibility check script at /home/praeducer/.vscode-server/bin/4437686ffebaf200fa4a6e6e67f735f3edf24ada/bin/helpers/check-requirements.sh
+Running compatibility check script
+Compatibility check successful (0)
 ```
 
 Follow this step-by-step guide to Get started using Git on WSL and connect your project to the Git version control system, along with using the credential manager for authentication, using Git Ignore files, understanding Git line endings, and using the Git commands built-in to VS Code.
