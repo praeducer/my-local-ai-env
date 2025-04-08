@@ -372,9 +372,21 @@ Running compatibility check script
 Compatibility check successful (0)
 ```
 
+Remote - SSH: Install an OpenSSH compatible SSH client.
+```
+sudo apt-get install openssh-client
+sudo apt-get install openssh-server
+```
+https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client
+
 Follow this step-by-step guide to Get started using Git on WSL and connect your project to the Git version control system, along with using the credential manager for authentication, using Git Ignore files, understanding Git line endings, and using the Git commands built-in to VS Code.
 
 ![alt text](https://learn.microsoft.com/en-us/windows/wsl/media/git-versions.gif)
+
+For the latest stable Git version in Ubuntu/Debian, enter the command:
+```
+sudo apt-get install git
+```
 
 https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git
 
