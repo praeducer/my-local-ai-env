@@ -449,7 +449,6 @@ After installation, you can access Open WebUI at http://localhost:3000. Enjoy! ð
 
 https://github.com/open-webui/open-webui
 
-
 ### Unsure if these took effect
 
 ```
@@ -460,4 +459,24 @@ cd data-science-stack
 
 ```
 C:\Users\paulp> sudo netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=192.168.1.254
+```
+
+### Network troubleshooting
+
+Problem: Open WebUI is running at localhost:3000 but it is not the same instance as is running in the Docker container on WSL2. Some other intsall seems to be interfering. 
+
+Open WebUI: Server Connection Error
+If you're experiencing connection issues, itâ€™s often due to the WebUI docker container not being able to reach the Ollama server at 127.0.0.1:11434 (host.docker.internal:11434) inside the container . Use the --network=host flag in your docker command to resolve this. Note that the port changes from 3000 to 8080, resulting in the link: http://localhost:8080.
+
+https://docs.openwebui.com/troubleshooting/
+
+```
+praeducer@prAIserver:~$ curl http://127.0.0.1:11434
+Ollama is running
+praeducer@prAIserver:~$ ss -nltp
+```
+
+```
+PS C:\Users\paulp> netstat -nao -p TCP
+PS C:\Users\paulp> Get-Process -Id 51188
 ```
