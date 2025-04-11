@@ -449,6 +449,47 @@ After installation, you can access Open WebUI at http://localhost:3000. Enjoy! �
 
 https://github.com/open-webui/open-webui
 
+
+🚀 Accessing Ollama from Open WebUI
+
+Struggling to connect to Ollama from Open WebUI? It could be because Ollama isn’t listening on a network interface that allows external connections. Let’s sort that out:
+
+
+    Update Environment Variables: Ensure that the OLLAMA_HOST is accurately set within your deployment environment. 
+
+    Restart Ollama🔄: A restart is needed for the changes to take effect.
+
+To set it permanently for all future bash sessions add such line to your .bashrc file in your $HOME directory.
+
+To set it permanently, and system wide (all users, all processes) add set variable in /etc/environment:
+
+sudo -H gedit /etc/environment
+
+This file only accepts variable assignments like:
+
+Environment="OLLAMA_HOST=172.17.0.1"
+
+Do not use the export keyword here.
+
+Use source ~/.bashrc in your terminal for the changes to take place immediately.
+
+💡 After setting up, verify that Ollama is accessible by visiting the WebUI interface.
+
+For more detailed instructions on configuring Ollama, please refer to the Ollama's Official Documentation.
+🐳 Docker Connection Error
+
+If you're seeing a connection error when trying to access Ollama, it might be because the WebUI docker container can't talk to the Ollama server running on your host. Let’s fix that:
+
+```
+sudo docker stop open-webui
+sudo docker rm -f open-webui
+docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
+```
+
+🔗 After running the above, your WebUI should be available at http://localhost:8080.
+
+https://docs.openwebui.com/troubleshooting/connection-error/
+
 ### Unsure if these took effect
 
 ```
@@ -470,10 +511,51 @@ If you're experiencing connection issues, it’s often due to the WebUI docker c
 
 https://docs.openwebui.com/troubleshooting/
 
+Connection to Ollama Server
+
+Setting environment variables on Linux
+
+If Ollama is run as a systemd service, environment variables should be set using systemctl:
+
+    Edit the systemd service by calling systemctl edit ollama.service. This will open an editor.
+
+    For each environment variable, add a line Environment under section [Service]:
+
+    [Service]
+    Environment="OLLAMA_HOST=0.0.0.0:11434"
+
+Save and exit.
+
+Reload systemd and restart Ollama:
+
+systemctl daemon-reload
+systemctl restart ollama
+
+https://github.com/ollama/ollama/blob/main/docs/faq.md#setting-environment-variables-on-linux
+
+This issue happended because of Ollama and Open-webUI cannot communicate.
+Solution:
+Step 1: Command to open Ollama service file: sudo nano /etc/systemd/system/ollama.service
+Step 2: Add variable: Environment="OLLAMA_HOST=172.17.0.1"
+Note: You can get this IP by looking for gateway IP address command: sudo docker network inspect bridge
+Step 3: Restart services:
+```
+sudo systemctl daemon-reload  #Reload the systemd configuration
+sudo systemctl restart ollama  #Restart the Ollama service
+sudo docker rm -f webui #Stop and remove OpenWebUI, you can check your container name is webiui or open-webui by using sudo docker ps -a
+sudo docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+```
+
+https://github.com/open-webui/open-webui/discussions/4376
+
+To test Ollama and Open WebUI, check in browser at http://localhost:11434/ and http://localhost:11434/api/version and in command line with:
 ```
 praeducer@prAIserver:~$ curl http://127.0.0.1:11434
 Ollama is running
+praeducer@prAIserver:~$ ollama list
 praeducer@prAIserver:~$ ss -nltp
+praeducer@prAIserver:~$ curl http://localhost:8080/health
+praeducer@prAIserver:~$ curl http://localhost:3000/health
 ```
 
 ```
